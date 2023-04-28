@@ -2,11 +2,11 @@
 provider "aws" {
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
-    region = var.aws_region
+  region = var.aws_region
 }
 ### Data
 data "aws_ssm_parameter" "ami" {
-    name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
 ### Resources
@@ -20,14 +20,14 @@ resource "aws_vpc" "sample_vpc" {
 }
 
 resource "aws_internet_gateway" "sample_igw" {
-    vpc_id = aws_vpc.sample_vpc.id  
+  vpc_id = aws_vpc.sample_vpc.id  
   tags = local.common_tags
 }
   
 resource "aws_subnet" "sample_subnet1" {
-    cidr_block = var.vpc_subnet1_cidr_block
-    vpc_id = aws_vpc.sample_vpc.id
-    map_public_ip_on_launch = var.map_public_ip_on_launch
+  cidr_block = var.vpc_subnet1_cidr_block
+  vpc_id = aws_vpc.sample_vpc.id
+  map_public_ip_on_launch = var.map_public_ip_on_launch
   tags = local.common_tags
 }
 
@@ -43,8 +43,8 @@ resource "aws_route_table" "sample_route_table" {
 }
 
 resource "aws_route_table_association" "sample_route_tbl_assoc" {
-    subnet_id = aws_subnet.sample_subnet1.id
-    route_table_id = aws_route_table.sample_route_table.id
+  subnet_id = aws_subnet.sample_subnet1.id
+  route_table_id = aws_route_table.sample_route_table.id
 }
 
 # Security Groups 
